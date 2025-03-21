@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .project {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #p1Score {
+            color :orange;
+            font-size: 20px;
+        }
+
+        #p2Score {
+            color: green;
+            font-size: 20px;
+        }
+        /*Added to fix Git Hub Link Style Bug*/
+        footer a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        /*Added to fix Git Hub Link Style Bug*/
+        footer a:hover {
+            color: #f39c12;
+            /* Change color on hover */
+        }
+    </style>
+    <title>Activity 04 Portfolio Projects</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./index.html">About Me</a></li>
+                <li><a href="./ping.html">Projects</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Projects</h2>
+        <!-- <div class="project">
+            
+        </div> -->
+
+        <h1 id="p1Score"></h1>
+        <h1 id="p2Score"></h1>
+        <canvas id="canvas" width="1200" height="600" style="border:1px solid grey"></canvas>
+        <br>
+        <button id="start">Start</button>
+        <button id="stop">Reset</button>
+        <script src="./ping.js"></script>
+        
+    </div>
+
+    <footer>
+        <p>Follow us on:</p>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <p>&copy; 2024 Anthony Albertini</p>
+    </footer>
+</body>
+
+</html>
