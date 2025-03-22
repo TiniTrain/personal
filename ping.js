@@ -15,7 +15,7 @@ let p1y = 250;
 let p2x = 1160;
 let p2y = 250;
 let p1Speed = 10;
-let p2Speed = 8;
+let p2Speed = 2;
 
 let ballX = 595;
 let ballY = 290;
@@ -52,10 +52,14 @@ const moveRectangle2 = () => {
   ctx.clearRect(1150, 0, 50, 600);
   ctx.fillStyle = "green";
 
-  if (p2y + 50 < ballY - 10) {
-    p2y += p2Speed;
-  } else if (p2y + 50 > ballY + 10) {
-    p2y -= p2Speed;
+  let difficultyControl = Math.floor(Math.random() * 3);
+
+  if (difficultyControl >= 1) {
+    if (p2y + 50 < ballY - 10) {
+      p2y += p2Speed;
+    } else if (p2y + 50 > ballY + 10) {
+      p2y -= p2Speed;
+    }
   }
 
   ctx.fillRect(p2x, p2y, 20, 100);
@@ -92,9 +96,15 @@ const moveBall = () => {
 
   //Calculates distance for paddle collisions
   if (
-    calculateDistance(ballX, ballY, p1x + 30, p1y + 50) ||
-    calculateDistance(p2x, p2y + 50, ballX, ballY)
+    calculateDistance(ballX, ballY, p1x, p1y + 50) ||
+    calculateDistance(p2x + 20, p2y + 50, ballX, ballY)
   ) {
+    //fixes hitting bug
+    if (ballXVelo > 0) {
+      ballX -= 20;
+    } else if (ballXVelo < 0) {
+      ballX += 20;
+    }
     ballXVelo *= -1;
 
     if (hitNum > 5 || ballYVelo == 0) {
@@ -120,7 +130,7 @@ const moveBall = () => {
       document.getElementById("p2Score").innerHTML =
         "Player 2 Score: " + p2Score;
     }
-    p2Speed = Math.floor(Math.random() * 3) + 7;
+    p2Speed = Math.floor(Math.random() * 3) + 1;
     resetBall();
     //Both these lines arent working?
     //Figure out why
@@ -133,6 +143,10 @@ const moveBall = () => {
 
   // Moves CPU
   moveRectangle2();
+
+  //Redraws orange to help with bugs
+  ctx.fillStyle = "orange";
+  ctx.fillRect(p1x, p1y, 20, 100);
 
   ctx.fillStyle = "pink";
   ctx.fillRect(ballX, ballY, 10, 10);
