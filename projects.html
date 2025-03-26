@@ -7,35 +7,23 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .scoreContainer {
-            width: fit-content;
-            margin: auto;
-            padding-bottom: 20px;
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px;
         }
 
-        .gameContainer {
-            width: fit-content;
-            margin: auto;
-            padding-bottom: 20px;
+        .project {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
         }
 
-        #title {
-            text-align: center;
+        .container ul {
+            list-style: none;
         }
 
-        #p1Score {
-            color : #f39c12;
-            font-size: 20px;
-            float: left;
-            padding-right: 200px;
-        }
 
-        #p2Score {
-            color: #79B7D2;
-            font-size: 20px;
-            float: right;
-            padding-left: 200px;
-        }
         /*Added to fix Git Hub Link Style Bug*/
         footer a {
             color: #fff;
@@ -50,7 +38,7 @@
             /* Change color on hover */
         }
     </style>
-    <title>Anthony Albertini - Ping</title>
+    <title>Anthony Albertini - Projects</title>
 </head>
 
 <body>
@@ -64,20 +52,11 @@
         </nav>
     </header>
 
-    <div class="scoreContainer">
-        <h2 id="title">Ping</h2>
-        <h1 id="p1Score"></h1>
-        <h1 id="p2Score"></h1>
+    <div class="container">
+        <ul>
+            <li><h2 style="margin-left: 75px;">Ping</h2> <a href="./ping.html"><image src="./images/pingPreview.png" style="width:250px;"></image></a></li>
+        </ul>
     </div>
-
-    <div class="scoreContainer">
-        <canvas id="canvas" width="1200" height="600" style="border:2px solid #CA44A1; background-color: #333"></canvas>
-        <br>
-        <button id="start">Start</button>
-        <button id="stop">Reset</button>
-        <script src="./ping.js"></script>
-    </div>  
-    
 
     <footer>
         <p>Follow us on:</p>

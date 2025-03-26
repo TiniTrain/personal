@@ -10,12 +10,19 @@ let p2Score = 0;
 document.getElementById("p1Score").innerHTML = "Player 1 Score: " + p1Score;
 document.getElementById("p2Score").innerHTML = "Player 2 Score: " + p2Score;
 
+let started = false;
+
+const p1color = " #CC5B29";
+const p2color = "#79B7D2";
+const lineColor = "#CA44A1";
+const ballColor = "#65CD85";
+
 let p1x = 20;
 let p1y = 250;
 let p2x = 1160;
 let p2y = 250;
 let p1Speed = 10;
-let p2Speed = 2;
+let p2Speed = 3;
 
 let ballX = 595;
 let ballY = 290;
@@ -25,7 +32,7 @@ let ballYVelo = 0;
 let hitNum = 0;
 
 const drawCenterLine = () => {
-  ctx.strokeStyle = "red";
+  ctx.strokeStyle = lineColor;
   ctx.lineWidth = 5;
   ctx.beginPath();
   ctx.moveTo(600, 0);
@@ -36,21 +43,21 @@ const drawCenterLine = () => {
 const startingPlaces = () => {
   ctx.clearRect(0, 0, 1200, 600);
 
-  ctx.fillStyle = "orange";
+  ctx.fillStyle = p1color;
   ctx.fillRect(p1x, p1y, 20, 100);
 
   drawCenterLine();
 
-  ctx.fillStyle = "pink";
+  ctx.fillStyle = ballColor;
   ctx.fillRect(ballX, ballY, 10, 10);
 
-  ctx.fillStyle = "green";
+  ctx.fillStyle = p2color;
   ctx.fillRect(p2x, p2y, 20, 100);
 };
 
 const moveRectangle2 = () => {
   ctx.clearRect(1150, 0, 50, 600);
-  ctx.fillStyle = "green";
+  ctx.fillStyle = p2color;
 
   let difficultyControl = Math.floor(Math.random() * 3);
 
@@ -67,7 +74,7 @@ const moveRectangle2 = () => {
 
 const moveRectangle = (isUp) => {
   ctx.clearRect(p1x - 20, p1y - 100, 40, 200);
-  ctx.fillStyle = "orange";
+  ctx.fillStyle = p1color;
   if (isUp) {
     p1y -= p1Speed * 2;
   } else {
@@ -100,9 +107,9 @@ const moveBall = () => {
     calculateDistance(p2x + 20, p2y + 50, ballX, ballY)
   ) {
     //fixes hitting bug
-    if (ballXVelo > 0) {
+    if (ballXVelo > 0 && ballX < p2x) {
       ballX -= 20;
-    } else if (ballXVelo < 0) {
+    } else if (ballXVelo < 0 && ballX > p1x) {
       ballX += 20;
     }
     ballXVelo *= -1;
@@ -130,7 +137,8 @@ const moveBall = () => {
       document.getElementById("p2Score").innerHTML =
         "Player 2 Score: " + p2Score;
     }
-    p2Speed = Math.floor(Math.random() * 3) + 1;
+    //changes cpu speed
+    p2Speed = Math.floor(Math.random() * 3) + 2;
     resetBall();
     //Both these lines arent working?
     //Figure out why
@@ -144,11 +152,11 @@ const moveBall = () => {
   // Moves CPU
   moveRectangle2();
 
-  //Redraws orange to help with bugs
-  ctx.fillStyle = "orange";
+  //Redraws #9E5433 to help with bugs
+  ctx.fillStyle = p1color;
   ctx.fillRect(p1x, p1y, 20, 100);
 
-  ctx.fillStyle = "pink";
+  ctx.fillStyle = ballColor;
   ctx.fillRect(ballX, ballY, 10, 10);
 
   setTimeout(moveBall, 10);
@@ -165,13 +173,13 @@ const resetBall = () => {
   ballXVelo = 0;
   ballYVelo = 0;
 
-  ctx.fillStyle = "pink";
+  ctx.fillStyle = ballColor;
   ctx.fillRect(ballX, ballY, 10, 10);
 
   //Why not working??
-  setTimeout(5000);
-
-  ballXVelo = temp;
+  setTimeout(function () {
+    ballXVelo = temp;
+  }, 3000);
 };
 
 const calculateDistance = (x1, y1, x2, y2) => {
@@ -188,8 +196,11 @@ const calculateDistance = (x1, y1, x2, y2) => {
 };
 
 startButton.onclick = () => {
-  moveBall();
-  moveRectangle2();
+  if (started == false) {
+    moveBall();
+    moveRectangle2();
+    started = true;
+  }
 };
 
 stopButton.onclick = () => {
@@ -203,18 +214,18 @@ document.addEventListener("keydown", (event) => {
   // if (event.code === "KeyA") {
   //   x -= 10;
   // }
-  if (event.code === "KeyW") {
+  if (event.code === "KeyW" || event.code === "ArrowUp") {
     // ctx.clearRect(p1x, p1y, 20, 100);
     // p1y -= 10;
-    // ctx.fillStyle = "orange";
+    // ctx.fillStyle = "#9E5433";
     // ctx.fillRect(p1x, p1y, 20, 100);
 
     moveRectangle(true);
   }
-  if (event.code === "KeyS") {
+  if (event.code === "KeyS" || event.code === "ArrowDown") {
     // ctx.clearRect(p1x, p1y, 20, 100);
     // p1y += 10;
-    // ctx.fillStyle = "orange";
+    // ctx.fillStyle = "#9E5433";
     // ctx.fillRect(p1x, p1y, 20, 100);
 
     moveRectangle(false);
